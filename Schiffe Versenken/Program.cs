@@ -6,7 +6,10 @@ namespace Schiffe_Versenken
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            CreateMatchField createMatchField = new CreateMatchField("14");
+            Console.ReadLine();
+           
         }
     }
 }
