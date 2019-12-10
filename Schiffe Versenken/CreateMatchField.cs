@@ -7,9 +7,9 @@ namespace Schiffe_Versenken
         private int size { get; set; }
         public int[,] matchfield { get; set; }
 
-        public CreateMatchField(string size)
+        public CreateMatchField(Data data)
         {
-            this.size = Convert.ToInt32(size);
+            this.size = data.size;
             this.matchfield = new int[this.size, this.size];
             Build();
         }

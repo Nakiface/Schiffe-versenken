@@ -2,15 +2,15 @@
 
 namespace Schiffe_Versenken
 {
-    static class initialize
+    static class Initialize
     {
-        static public void start()
+        static public Data Start()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             ConsoleOutput consoleOutput = new ConsoleOutput();
             consoleOutput.Greeting();
-            CreateMatchField createMatchField = new CreateMatchField(consoleOutput.SizeMatchField());
+            Data data = new Data(consoleOutput.SizeMatchField());
+            return data;
         }
     }
-
 }
