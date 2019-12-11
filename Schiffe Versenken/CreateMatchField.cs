@@ -16,6 +16,7 @@ namespace Schiffe_Versenken
 
         private void Build ()
         {
+            //Konsole Curser.Left Curser.Top
             Console.WriteLine();
             Console.Write("   ");
             for (int z = 0; z < matchfield.GetLength(0); z++)
