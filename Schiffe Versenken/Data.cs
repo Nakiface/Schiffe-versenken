@@ -1,18 +1,27 @@
 ﻿using System;
-
 namespace Schiffe_Versenken
 {
     class Data
     {
-        public int size { get; set; }
-        public Field[,] Ai_MatchField { get; set; }
-        public Field[,] Hu_Matchfield { get; set; }
+        public Field[,] Matchfield { get; set; }
 
         public Data(string size)
         {
-            this.size = Convert.ToInt32(size);
-            this.Ai_MatchField = new Field[this.size, this.size];
-            this.Hu_Matchfield = new Field[this.size, this.size];
+            
+            this.Matchfield = new Field[Convert.ToInt32(size), Convert.ToInt32(size)];
+            Initialize(this.Matchfield,Convert.ToInt32(size));
+        }
+
+        private Field[,] Initialize (Field[,] field, int size)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    field[x, y] = new Field();
+                }
+            }
+            return field;
         }
     }
 }

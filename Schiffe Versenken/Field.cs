@@ -2,9 +2,10 @@
 {
     class Field
     {
-        public bool Ship { get; set; }
-        public bool Water { get; set; }
-        public bool Hit { get; set; }
-        public bool Miss { get; set; }
+        public bool Ship { get; set; } = false;
+        public bool Water { get; set; } = true;
+        public bool Hit { get; set; } = false;
+        public bool Miss { get; set; } = false;
+        public bool Placing { get; set; } = true;
     }
 }

@@ -7,10 +7,15 @@ namespace Schiffe_Versenken
         static public Data Start()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            ConsoleOutput consoleOutput = new ConsoleOutput();
-            consoleOutput.Greeting();
-            Data data = new Data(consoleOutput.SizeMatchField());
+            ConsoleOutput.Greeting();
+            Data data = new Data(ConsoleOutput.SizeMatchField());
+            CreateMatchField createMatchField = new CreateMatchField();
+            createMatchField.PlaceShips(data);
+            
+
             return data;
         }
     }
+
+    //class BuildMatch
 }

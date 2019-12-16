@@ -7,7 +7,7 @@ namespace Schiffe_Versenken
         static void Main(string[] args)
         {
             var data = Initialize.Start();
-            CreateMatchField createMatchField = new CreateMatchField(data);
+            ConsoleOutput.CreateMatchField(data);
             Console.ReadLine();       
         }
     }
