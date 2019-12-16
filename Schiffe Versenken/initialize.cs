@@ -10,9 +10,7 @@ namespace Schiffe_Versenken
             ConsoleOutput.Greeting();
             Data data = new Data(ConsoleOutput.SizeMatchField());
             CreateMatchField createMatchField = new CreateMatchField();
-            createMatchField.PlaceShips(data);
-            
-
+            createMatchField.PlaceShips(data);          
             return data;
         }
     }
