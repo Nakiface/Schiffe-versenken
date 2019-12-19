@@ -8,7 +8,13 @@ namespace Schiffe_Versenken
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             ConsoleOutput.Greeting();
-            Data data = new Data(ConsoleOutput.SizeMatchField());
+            var size = ConsoleOutput.SizeMatchField();
+            if (size > 25)
+            {
+                ConsoleOutput.MatchfieldToBig();
+            }
+            Data data = new Data(size);
+            Console.Clear();
             CreateMatchField createMatchField = new CreateMatchField();
             createMatchField.PlaceShips(data);          
             return data;

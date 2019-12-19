@@ -7,29 +7,33 @@ namespace Schiffe_Versenken
     {
         public Data PlaceShips(Data data)
         {
-            List<int> ships = new List<int> { 5, 4, 4, 3, 3, 3, 2, 2, 2, 2 };
+            List<int> ships = new List<int> { 5 , 4, 4, 3, 3, 3, 2, 2, 2, 2 };
             var size = data.Matchfield.GetLength(0);
             return PlaceShip(data, ships, size);
-
-
         }
 
         private static Data PlaceShip(Data data, List<int> ships, int size)
         {
+            int shipsplaced = 0;
+            Shuffle.List(ships);
             foreach (int ship in ships)
             {
                 var allowedToPlace = false;
                 int xPositionStart = 0;
                 int yPositionStart = 0;
                 int directory = 0;
-                while (!allowedToPlace)
+                int trytobuild = 0;              
+                while (!allowedToPlace && trytobuild < 10000)
                 {
-                    try
+                    trytobuild++;
+                    Random random = new Random();
+                    xPositionStart = random.Next(0, size);
+                    yPositionStart = random.Next(0, size);
+                    directory = random.Next(0, 2);
+                    if ((directory == 0 && (xPositionStart + ship > size)) || (directory == 1 && (yPositionStart + ship > size)))
+                        allowedToPlace = false;
+                    else
                     {
-                        Random random = new Random();
-                        xPositionStart = random.Next(0, size);
-                        yPositionStart = random.Next(0, size);
-                        directory = random.Next(0, 2);
                         for (int i = 0; i < ship; i++)
                         {
                             var xPositionCheck = xPositionStart;
@@ -46,11 +50,11 @@ namespace Schiffe_Versenken
                                 break;
                         }
                     }
-                    catch
-                    {
-                        allowedToPlace = false;
-                    }
-
+                }
+                if (trytobuild == 10000)
+                {
+                    ConsoleOutput.CantPlaceAllShips(shipsplaced);
+                    return data;
                 }
                 int xPosition = xPositionStart;
                 int yPosition = yPositionStart;
@@ -62,6 +66,7 @@ namespace Schiffe_Versenken
                         yPosition = yPositionStart + i;
                     data.Matchfield[xPosition, yPosition].Ship = true;
                 }
+                shipsplaced++;
                 setProhibitedFields(data, size);
             }
             return data;
@@ -77,27 +82,17 @@ namespace Schiffe_Versenken
                     {
                         for (int xadd = -1; xadd < 2; xadd++)
                         {
-                            try
-                            {
+                            if(!(x + xadd < 0) && !(x + xadd >= size))
                                 data.Matchfield[x + xadd, y].Placing = false;
-                            }
-                            catch { }
                         }
                         for (int yadd = -1; yadd < 2; yadd++)
                         {
-                            try
-                            {
-                                data.Matchfield[x, y+yadd].Placing = false;
-                            }
-                            catch { }
-                        }
-
-                        
+                            if(!(y+yadd < 0) && !(y+yadd >= size))
+                                data.Matchfield[x, y + yadd].Placing = false;
+                        }                     
                     }
                 }
             }
         }
     }
-
-
 }

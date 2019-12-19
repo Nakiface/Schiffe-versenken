@@ -5,11 +5,11 @@ namespace Schiffe_Versenken
     {
         public Field[,] Matchfield { get; set; }
 
-        public Data(string size)
+        public Data(int size)
         {
             
-            this.Matchfield = new Field[Convert.ToInt32(size), Convert.ToInt32(size)];
-            Initialize(this.Matchfield,Convert.ToInt32(size));
+            this.Matchfield = new Field[size, size];
+            Initialize(Matchfield, size);
         }
 
         private Field[,] Initialize (Field[,] field, int size)

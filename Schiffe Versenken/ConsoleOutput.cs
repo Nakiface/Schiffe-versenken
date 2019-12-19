@@ -10,10 +10,13 @@ namespace Schiffe_Versenken
             Console.WriteLine("Hallo gleich gehts los");
         }
 
-        static public string SizeMatchField ()
+        static public int SizeMatchField ()
         {
+            int size = 0;
             Console.Write("Geben Sie ihre Spielfeldgröße ein: ");
-            return Console.ReadLine();
+            if (!int.TryParse(Console.ReadLine(), out size))
+                IncorrectInputFieldsize();
+            return size;
         }
 
         static public List<string> Action ()
@@ -26,14 +29,62 @@ namespace Schiffe_Versenken
             return actions;
         }
 
+        static public void IncorrectInputShot()
+        {
+            Console.WriteLine("Die Eingabe der Koordinaten war Fehlerhaft, Bitte nocheinmal...\n");
+        }
+
+        static public void IncorrectInputFieldsize()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nFehlerhafte Eingabe das Programm startet neu\n");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Program.Start();
+        }
+
         static public void GameEnd(int countTry)
         {
             Console.WriteLine($"Sie haben gewonnen und {countTry} Versuche gebraucht");
+            Console.Write("Wenn Sie nochmal Spielen wollen Tippen Sie bitte \"y\": ");
+            var Eingabe = Console.ReadLine();
+            if (Eingabe == "y" || Eingabe == "Y")
+            {
+                Console.Clear();
+                Program.Start();
+            }
+        }
+
+        static public void MatchfieldToBig()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Digga das Spielfeld ist zu Groß Übertreib mal nicht!");
+            Console.WriteLine("Jetzt starten wir nochmal und dann machst du mal Piano! \n");
+            Program.Start();
+        }
+
+        static public void CantPlaceAllShips(int shipsplaced)
+        {
+            if (shipsplaced > 0)
+            {
+                Console.WriteLine($"Leider konnten nicht alle Schiffe plaziert werden");
+                Console.WriteLine($"Es wurden {shipsplaced} Schiffe plaziert");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Das Spielfeld ist zu klein es konnte keine Boot gesetzt werden!");
+                Console.WriteLine("Mit einem Tastendruck starten Sie das Spiel neu");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.ReadLine();
+                Console.Clear();
+                Initialize.Start();
+            }
         }
 
         static public void CreateMatchField(Data data)
         {
-            Console.WriteLine();
+            Console.Clear();
             Console.Write("   ");
             for (int z = 0; z < data.Matchfield.GetLength(0); z++)
             {
