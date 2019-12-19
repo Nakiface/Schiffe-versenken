@@ -5,16 +5,15 @@ namespace Schiffe_Versenken
 {
     class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            Start();
-        }
+            //Initialisierung
+            var board = Initialize.Start();
+            //Game initalisieren
+            IGame play = new HumanPlayer(board);
+            //Spiel starten
+            play.Start(new GameRendererBase());
 
-        public static void Start()
-        {
-            var data = Initialize.Start();
-            ConsoleOutput.CreateMatchField(data);
-            Play play = new Play(data);
             Console.ReadLine();
         }
     }

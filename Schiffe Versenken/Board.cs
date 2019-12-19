@@ -1,13 +1,13 @@
 ﻿using System;
 namespace Schiffe_Versenken
 {
-    class Data
+    public class Board
     {
+        //wir bauen das Spielfeld und setzen auf jede Koordinate ein "Field"
         public Field[,] Matchfield { get; set; }
 
-        public Data(int size)
-        {
-            
+        public Board(int size)
+        {   
             this.Matchfield = new Field[size, size];
             Initialize(Matchfield, size);
         }

@@ -5,24 +5,28 @@ namespace Schiffe_Versenken
 {
     class CreateMatchField
     {
-        public Data PlaceShips(Data data)
+        public Board PlaceShips(Board data)
         {
-            List<int> ships = new List<int> { 5 , 4, 4, 3, 3, 3, 2, 2, 2, 2 };
-            var size = data.Matchfield.GetLength(0);
-            return PlaceShip(data, ships, size);
-        }
+            //Es Wird eine Liste erstellt mit Schiffen einer bestimmten Größen
+            List<int> ships = new List<int> { 5, 4, 4, 3, 3, 3, 2, 2, 2, 2 };
 
-        private static Data PlaceShip(Data data, List<int> ships, int size)
-        {
+            //Es wird die Größe des Spielfeldes ermittelt 
+            var size = data.Matchfield.GetLength(0);
+            
+            //eine Variable zum zählen der Schiffe wird erstellt
             int shipsplaced = 0;
+
+            //Die Liste der Schiffe wird gemischt
             Shuffle.List(ships);
+
+            //Für jedes Schiff werden die folgenden Schritte durchgeführt
             foreach (int ship in ships)
             {
                 var allowedToPlace = false;
                 int xPositionStart = 0;
                 int yPositionStart = 0;
                 int directory = 0;
-                int trytobuild = 0;              
+                int trytobuild = 0;
                 while (!allowedToPlace && trytobuild < 10000)
                 {
                     trytobuild++;
@@ -72,7 +76,7 @@ namespace Schiffe_Versenken
             return data;
         }
 
-        private static void setProhibitedFields(Data data, int size)
+        private static void setProhibitedFields(Board data, int size)
         {
             for (int x = 0; x < size; x++)
             {

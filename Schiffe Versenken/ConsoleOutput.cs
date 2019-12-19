@@ -40,7 +40,7 @@ namespace Schiffe_Versenken
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\nFehlerhafte Eingabe das Programm startet neu\n");
             Console.ForegroundColor = ConsoleColor.Gray;
-            Program.Start();
+            Program.Main();
         }
 
         static public void GameEnd(int countTry)
@@ -51,7 +51,7 @@ namespace Schiffe_Versenken
             if (Eingabe == "y" || Eingabe == "Y")
             {
                 Console.Clear();
-                Program.Start();
+                Program.Main();
             }
         }
 
@@ -60,7 +60,7 @@ namespace Schiffe_Versenken
             Console.WriteLine();
             Console.WriteLine("Digga das Spielfeld ist zu Groß Übertreib mal nicht!");
             Console.WriteLine("Jetzt starten wir nochmal und dann machst du mal Piano! \n");
-            Program.Start();
+            Program.Main();
         }
 
         static public void CantPlaceAllShips(int shipsplaced)
@@ -82,7 +82,7 @@ namespace Schiffe_Versenken
             }
         }
 
-        static public void CreateMatchField(Data data)
+        static public void CreateMatchField(Board data)
         {
             Console.Clear();
             Console.Write("   ");
@@ -104,10 +104,7 @@ namespace Schiffe_Versenken
                     Console.Write($"{x + 1} ");
                 for (int y = 0; y < data.Matchfield.GetLength(1); y++)
                 {
-                    if (data.Matchfield[x, y].Water)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                    }
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     if (data.Matchfield[x, y].Ship)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
