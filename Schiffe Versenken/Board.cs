@@ -6,11 +6,15 @@ namespace Schiffe_Versenken
         //wir bauen das Spielfeld und setzen auf jede Koordinate ein "Field"
         public Field[,] Matchfield { get; set; }
         public int size { get; set; }
+        public int shipfields { get; set; }
+        public int countTry { get; set; }
 
         public Board(int size)
         {   
             this.Matchfield = new Field[size, size];
             this.size = size;
+            this.countTry = 0;
+            this.shipfields = 0;
             Initialize(Matchfield, size);
         }
 

@@ -33,63 +33,50 @@ namespace Schiffe_Versenken
         public GameBase(Board board)
         {
             this.board = board;
+            this.board.shipfields = CountShipFields();
         }
 
-        public void Start(IGameRenderer renderer)
+        public abstract void Start(IGameRenderer renderer);
+
+        public void DoATurn(IGameRenderer renderer)
         {
             //Gebe das neue Spielfeld aus 
             renderer.Render(board);
 
-            //zählt die Anzahl der Felder auf denen Schiffe stehen 
-            //damit er weiß nach wievielen Treffern das Spiel zuende ist
-            var shipFields = CountShipFields();
+            //Spielfeldgröße wird ermittelt
+            int size = board.size;
 
-            //Variable zum Zählen der Züge
-            var countTry = 0;
+            //Die Koordinaten werden übergeben
+            List<int> actions = GetCoordinates(size);
 
-            //Solange noch nicht alle Felder mit Schiffen getroffen wurden
-            while (shipFields != 0)
+            //Koordinaten werden zugeordnet
+            var x = actions[0];
+            var y = actions[1];
+
+            //Wenn auf dem Feld auf das geschossen wurde ein Schiff steht
+            //setze die Feldinfo "das war ein Treffer" auf wahr
+            if (board.Matchfield[x, y].Ship)
             {
-                //Spielfeldgröße wird ermittelt
-                int size = board.Matchfield.GetLength(1);
-
-                //Die Koordinaten werden übergeben
-                List<int> actions = GetCoordinates(size);
-
-                //Koordinaten werden zugeordnet
-                var x = actions[0];
-                var y = actions[1];
-
-                //Wenn auf dem Feld auf das geschossen wurde ein Schiff steht
-                //setze die Feldinfo "das war ein Treffer" auf wahr
-                if (board.Matchfield[x, y].Ship)
+                board.Matchfield[x, y].Hit = true;
+                board.shipfields -= 1;
+                if (isShipSunk(x, y, size))
                 {
-                    board.Matchfield[x, y].Hit = true;
-                    shipFields -= 1;
-                    if (isShipSunk(x, y, size))
-                    {
-                        ShipIsSunk();
-                    }
+                    ShipIsSunk();
                 }
-
-                //Wenn auf dem Feld auf das geschossen wurde kein Schiff steht
-                //setze die Feldinfo "es war ein fehldschuss" auf wahr
-                else
-                {
-                    board.Matchfield[x, y].Miss = true;
-                }
-
-                //zähle die Versuche für Züge hoch
-                countTry++;
-
-                //Gebe das neue Spielfeld aus 
-                renderer.Render(board);
             }
 
-            //Das Spiel ist nun zu Ende es wird eine Nachricht ausgegeben
-            //und gefragt ob man nochmal Spielen will
-            ConsoleOutput.CreateMatchField(board);
-            ConsoleOutput.GameEnd(countTry);
+            //Wenn auf dem Feld auf das geschossen wurde kein Schiff steht
+            //setze die Feldinfo "es war ein fehldschuss" auf wahr
+            else
+            {
+                board.Matchfield[x, y].Miss = true;
+            }
+
+            //zähle die Versuche für Züge hoch
+            board.countTry++;
+
+            //Gebe das neue Spielfeld aus 
+            renderer.Render(board);
         }
 
         public abstract List<int> GetCoordinates(int size);
@@ -101,9 +88,9 @@ namespace Schiffe_Versenken
             //Das Spielfeld wird durchgegangen und es wird geguckt
             //auf wievielen Feldern ein schiff steht
             var shipfields = 0;
-            for (int x = 0; x < board.Matchfield.GetLength(1); x++)
+            for (int x = 0; x < board.size; x++)
             {
-                for (int y = 0; y < board.Matchfield.GetLength(1); y++)
+                for (int y = 0; y < board.size; y++)
                 {
                     if (board.Matchfield[x, y].Ship)
                         shipfields++;

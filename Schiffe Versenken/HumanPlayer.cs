@@ -2,10 +2,36 @@
 
 namespace Schiffe_Versenken
 {
+    public class HuVsKiPlayer : GameBase
+    {
+        public override List<int> GetCoordinates(int size)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void ShipIsSunk()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Start(IGameRenderer renderer)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
     public class HumanPlayer : GameBase
     {
         public HumanPlayer(Board board) : base(board)
         {
+        }
+
+        public override void Start(IGameRenderer renderer)
+        {
+            while (board.shipfields > 0)
+            {
+                DoATurn(renderer);
+            }
+            ConsoleOutput.GameEnd(board.countTry);
         }
 
         public override List<int> GetCoordinates(int size)

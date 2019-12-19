@@ -10,19 +10,18 @@ namespace Schiffe_Versenken
             //menu
             var menu = ConsoleOutput.Greeting();
 
-            //Initialisierung
-            var board = Initialize.Start();
-
             //Game initalisieren
             switch (menu)
             {
                 case "Mensch":
-                    IGame playHu = new HumanPlayer(board);
+                    var boardHu = Initialize.Start();
+                    IGame playHu = new HumanPlayer(boardHu);
                     //Spiel starten
                     playHu.Start(new GameRendererConsole());
                     break;
                 case "Ki":
-                    IGame playAi = new AIPlayer(board);
+                    var boardAi = Initialize.Start();
+                    IGame playAi = new AIPlayer(boardAi);
                     //Spiel starten
                     playAi.Start(new GameRendererBase());
                     break;
