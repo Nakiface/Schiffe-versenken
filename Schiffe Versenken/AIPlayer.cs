@@ -2,9 +2,9 @@
 
 namespace Schiffe_Versenken
 {
-    public class AI_Play : GameBase
+    public class AIPlayer : GameBase
     {
-        public AI_Play (Board board) : base(board)
+        public AIPlayer (Board board) : base(board)
         {
 
         }

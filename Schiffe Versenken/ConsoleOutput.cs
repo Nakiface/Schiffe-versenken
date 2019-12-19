@@ -5,9 +5,22 @@ namespace Schiffe_Versenken
 {
     static class ConsoleOutput
     {
-        static public void Greeting ()
+        static public string Greeting ()
         {
-            Console.WriteLine("Hallo gleich gehts los");
+            Console.Clear();
+            Console.WriteLine("Willkommen\nWer soll Spielen?: \n");
+            List<string> menu = new List<string>() { "Mensch", "Ki"};
+            int auswahl = 0;
+            foreach(string menuitem in menu)
+            {
+                auswahl++;
+                Console.WriteLine($"{auswahl}: {menuitem}");
+            }
+            Console.Write("\nEingabe bitte als Zahl: ");
+            if (!int.TryParse(Console.ReadLine(), out auswahl))
+                Program.Main();
+            Console.WriteLine();
+            return menu[auswahl - 1];
         }
 
         static public int SizeMatchField ()

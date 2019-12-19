@@ -8,7 +8,6 @@ namespace Schiffe_Versenken
         {
             //Umstellen des Encordings und Begrüßung
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            ConsoleOutput.Greeting();
 
             //Die Größe des Spielfeldes wird ermittelt und zu Große Eingaben abgefangen
             var size = ConsoleOutput.SizeMatchField();
