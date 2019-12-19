@@ -76,23 +76,23 @@ namespace Schiffe_Versenken
             return data;
         }
 
-        private static void setProhibitedFields(Board data, int size)
+        private static void setProhibitedFields(Board board, int size)
         {
             for (int x = 0; x < size; x++)
             {
                 for (int y = 0; y < size; y++)
                 {
-                    if (data.Matchfield[x, y].Ship)
+                    if (board.Matchfield[x, y].Ship)
                     {
                         for (int xadd = -1; xadd < 2; xadd++)
                         {
                             if(!(x + xadd < 0) && !(x + xadd >= size))
-                                data.Matchfield[x + xadd, y].Placing = false;
+                                board.Matchfield[x + xadd, y].Placing = false;
                         }
                         for (int yadd = -1; yadd < 2; yadd++)
                         {
                             if(!(y+yadd < 0) && !(y+yadd >= size))
-                                data.Matchfield[x, y + yadd].Placing = false;
+                                board.Matchfield[x, y + yadd].Placing = false;
                         }                     
                     }
                 }

@@ -10,7 +10,7 @@ namespace Schiffe_Versenken
             //Initialisierung
             var board = Initialize.Start();
             //Game initalisieren
-            IGame play = new HumanPlayer(board);
+            IGame play = new AI_Play(board);
             //Spiel starten
             play.Start(new GameRendererBase());
 

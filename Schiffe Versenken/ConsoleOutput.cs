@@ -29,6 +29,16 @@ namespace Schiffe_Versenken
             return actions;
         }
 
+        static public void ShipIsSunk ()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nDas Schiff ist untergegangen!!!");
+            Console.WriteLine("Weiter mit belibiger Taste");
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
         static public void IncorrectInputShot()
         {
             Console.WriteLine("Die Eingabe der Koordinaten war Fehlerhaft, Bitte nocheinmal...\n");
