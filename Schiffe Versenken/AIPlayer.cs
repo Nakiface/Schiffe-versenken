@@ -10,12 +10,7 @@ namespace Schiffe_Versenken
         }
         public override void Start(IGameRenderer renderer)
         {
-            while (board.shipfields > 0)
-            {
-                DoATurn(renderer);
-            }
-            ConsoleOutput.CreateMatchField(board);
-            ConsoleOutput.GameEnd(board.countTry);
+            DoATurn(renderer);          
         }
 
         public override List<int> GetCoordinates (int size)
@@ -26,6 +21,12 @@ namespace Schiffe_Versenken
         public override void ShipIsSunk()
         {
             
+        }
+
+        public override void GameEnd()
+        {
+            ConsoleOutput.CreateMatchField(board);
+            ConsoleOutput.GameEnd(board.countTry);
         }
     }
 }

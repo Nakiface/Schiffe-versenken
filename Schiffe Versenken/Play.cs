@@ -29,7 +29,7 @@ namespace Schiffe_Versenken
 
     public abstract class GameBase : IGame
     {
-        protected Board board { get; set; }
+        public Board board { get; set; }
         public GameBase(Board board)
         {
             this.board = board;
@@ -37,6 +37,8 @@ namespace Schiffe_Versenken
         }
 
         public abstract void Start(IGameRenderer renderer);
+
+        public abstract void GameEnd();
 
         public void DoATurn(IGameRenderer renderer)
         {
