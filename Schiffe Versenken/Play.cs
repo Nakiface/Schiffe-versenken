@@ -14,17 +14,27 @@ namespace Schiffe_Versenken
         { }
     }
 
-    public class GameRendererConsole:GameRendererBase
+    public class GameRendererMine:GameRendererBase
     {
         public override void Render(Board board)
         {
+            Console.WriteLine("Das ist mein Feld: ");
+            ConsoleOutput.CreateMatchField(board);
+        }
+    }
+
+    public class GameRendererEnemy:GameRendererBase
+    {
+        public override void Render(Board board)
+        {
+            Console.WriteLine("Das ist das Gegner Feld: ");
             ConsoleOutput.CreateMatchField(board);
         }
     }
 
     public interface IGame
     {
-        void Start(IGameRenderer renderer);
+        void Start();
     }
 
     public abstract class GameBase : IGame
@@ -36,15 +46,17 @@ namespace Schiffe_Versenken
             this.board.shipfields = CountShipFields();
         }
 
-        public abstract void Start(IGameRenderer renderer);
+        public abstract void Start();
 
-        public abstract void GameEnd();
+        public abstract void GameWon();
 
-        public void DoATurn(IGameRenderer renderer)
+        public void Render(IGameRenderer renderer)
         {
-            //Gebe das neue Spielfeld aus 
             renderer.Render(board);
+        }
 
+        public void DoATurn()
+        {
             //Spielfeldgröße wird ermittelt
             int size = board.size;
 
@@ -76,9 +88,6 @@ namespace Schiffe_Versenken
 
             //zähle die Versuche für Züge hoch
             board.countTry++;
-
-            //Gebe das neue Spielfeld aus 
-            renderer.Render(board);
         }
 
         public abstract List<int> GetCoordinates(int size);

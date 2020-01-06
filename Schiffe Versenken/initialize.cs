@@ -4,13 +4,12 @@ namespace Schiffe_Versenken
 {
     static class Initialize
     {
-        static public Board Start()
+        static public Board Start(int size)
         {
             //Umstellen des Encordings und Begrüßung
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             //Die Größe des Spielfeldes wird ermittelt und zu Große Eingaben abgefangen
-            var size = ConsoleOutput.SizeMatchField();
             if (size > 25)
             {
                 ConsoleOutput.MatchfieldToBig();

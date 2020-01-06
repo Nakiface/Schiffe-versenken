@@ -101,13 +101,12 @@ namespace Schiffe_Versenken
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.ReadLine();
                 Console.Clear();
-                Initialize.Start();
+                Program.Main();
             }
         }
 
         static public void CreateMatchField(Board data)
         {
-            Console.Clear();
             Console.Write("   ");
             for (int z = 0; z < data.Matchfield.GetLength(0); z++)
             {

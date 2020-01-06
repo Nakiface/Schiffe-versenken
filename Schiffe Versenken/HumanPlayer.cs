@@ -8,9 +8,9 @@ namespace Schiffe_Versenken
         {
         }
 
-        public override void Start(IGameRenderer renderer)
+        public override void Start()
         {
-            DoATurn(renderer);          
+            DoATurn();          
         }
 
         public override List<int> GetCoordinates(int size)
@@ -54,7 +54,7 @@ namespace Schiffe_Versenken
             ConsoleOutput.ShipIsSunk();
         }
 
-        public override void GameEnd()
+        public override void GameWon()
         {
             ConsoleOutput.GameEnd(board.countTry);
         }
