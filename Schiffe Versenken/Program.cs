@@ -33,6 +33,22 @@ namespace Schiffe_Versenken
                     }
                     playAi.GameEnd();
                     break;
+                case "Mensch vs KI":
+                    var boardAi2 = Initialize.Start();
+                    GameBase playAi2 = new AIPlayer(boardAi2);
+
+                    var boardHu2 = Initialize.Start();
+                    GameBase playHu2 = new HumanPlayer(boardHu2);
+
+                    while (playAi2.board.shipfields > 0 && playHu2.board.shipfields > 0)
+                    {
+                        playHu2.Start(new GameRendererConsole());
+                        playAi2.Start(new GameRendererConsole());
+                        Console.ReadLine();
+                    }
+                    playHu2.GameEnd();
+
+                    break;
             }
 
 

@@ -9,7 +9,7 @@ namespace Schiffe_Versenken
         {
             Console.Clear();
             Console.WriteLine("Willkommen\nWer soll Spielen?: \n");
-            List<string> menu = new List<string>() { "Mensch", "Ki"};
+            List<string> menu = new List<string>() { "Mensch", "Ki", "Mensch vs KI"};
             int auswahl = 0;
             foreach(string menuitem in menu)
             {
