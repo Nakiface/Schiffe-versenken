@@ -32,12 +32,7 @@ namespace Schiffe_Versenken
         }
     }
 
-    public interface IGame
-    {
-        void Start();
-    }
-
-    public abstract class GameBase : IGame
+    public abstract class GameBase
     {
         public Board board { get; set; }
         public GameBase(Board board)
@@ -69,7 +64,7 @@ namespace Schiffe_Versenken
 
             //Wenn auf dem Feld auf das geschossen wurde ein Schiff steht
             //setze die Feldinfo "das war ein Treffer" auf wahr
-            if (board.Matchfield[x, y].Ship)
+            if (board.Matchfield[x, y].Ship && !board.Matchfield[x,y].Hit)
             {
                 board.Matchfield[x, y].Hit = true;
                 board.shipfields -= 1;
@@ -81,7 +76,7 @@ namespace Schiffe_Versenken
 
             //Wenn auf dem Feld auf das geschossen wurde kein Schiff steht
             //setze die Feldinfo "es war ein fehldschuss" auf wahr
-            else
+            if (!board.Matchfield[x,y].Ship)
             {
                 board.Matchfield[x, y].Miss = true;
             }
@@ -110,21 +105,59 @@ namespace Schiffe_Versenken
             return shipfields;
         }
 
-        private bool isShipSunk(int x, int y, int size)
+        private bool isShipSunkXPlus(int x, int y, int size)
         {
-            for (int xadd = -1; xadd < 2; xadd++)
+            for (int xCheck = x; xCheck < size; xCheck++)
             {
-                if (!(x + xadd < 0) && !(x + xadd >= size))
-                    if (board.Matchfield[x + xadd, y].Ship && !board.Matchfield[x + xadd, y].Hit)
-                        return false;
-            }
-            for (int yadd = -1; yadd < 2; yadd++)
-            {
-                if (!(y + yadd < 0) && !(y + yadd >= size))
-                    if (board.Matchfield[x, y + yadd].Ship && !board.Matchfield[x, y + yadd].Hit)
-                        return false;
+                if (board.Matchfield[xCheck, y].Ship && !board.Matchfield[xCheck, y].Hit)
+                    return false;
+                if (!board.Matchfield[xCheck, y].Ship)
+                    return true;
             }
             return true;
+        }
+        private bool isShipSunkXMinus(int x, int y, int size)
+        {
+            for (int xCheck = x; xCheck >=0; xCheck--)
+            {
+                if (board.Matchfield[xCheck, y].Ship && !board.Matchfield[xCheck, y].Hit)
+                    return false;
+                if (!board.Matchfield[xCheck, y].Ship)
+                    return true;
+            }
+            return true;
+        }
+
+        private bool isShipSunkYPlus(int x, int y, int size)
+        {
+            for (int yCheck = x; yCheck < size; yCheck++)
+            {
+                if (board.Matchfield[x, yCheck].Ship && !board.Matchfield[x, yCheck].Hit)
+                    return false;
+                if (!board.Matchfield[x, yCheck].Ship)
+                    return true;
+            }
+            return true;
+        }
+
+        private bool isShipSunkYMinus(int x, int y, int size)
+        {
+            for (int yCheck = x; yCheck >= 0; yCheck--)
+            {
+                if (board.Matchfield[x, yCheck].Ship && !board.Matchfield[x, yCheck].Hit)
+                    return false;
+                if (!board.Matchfield[x, yCheck].Ship)
+                    return true;
+            }
+            return true;
+        }
+
+
+        private bool isShipSunk(int x, int y, int size)
+        {
+            if (isShipSunkXPlus(x, y, size) && isShipSunkXMinus(x, y, size) && isShipSunkYPlus(x, y, size) && isShipSunkYMinus(x, y, size))
+                return true;
+            return false;
         }
     }
 }

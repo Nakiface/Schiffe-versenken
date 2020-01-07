@@ -66,9 +66,21 @@ namespace Schiffe_Versenken
             Program.Main();
         }
 
-        static public void GameEnd(int countTry)
+        static public void GameWonHu(int countTry)
         {
             Console.WriteLine($"Sie haben gewonnen und {countTry} Versuche gebraucht");
+            Console.Write("Wenn Sie nochmal Spielen wollen Tippen Sie bitte \"y\": ");
+            var Eingabe = Console.ReadLine();
+            if (Eingabe == "y" || Eingabe == "Y")
+            {
+                Console.Clear();
+                Program.Main();
+            }
+        }
+
+        static public void GameWonAi(int countTry)
+        {
+            Console.WriteLine($"Der Computer hat gewonnen und {countTry} Versuche gebraucht");
             Console.Write("Wenn Sie nochmal Spielen wollen Tippen Sie bitte \"y\": ");
             var Eingabe = Console.ReadLine();
             if (Eingabe == "y" || Eingabe == "Y")
@@ -91,7 +103,12 @@ namespace Schiffe_Versenken
             if (shipsplaced > 0)
             {
                 Console.WriteLine($"Leider konnten nicht alle Schiffe plaziert werden");
-                Console.WriteLine($"Es wurden {shipsplaced} Schiffe plaziert");
+                if (shipsplaced == 1)
+                    Console.WriteLine($"Es wurden {shipsplaced} Schiff plaziert \n");
+                else
+                    Console.WriteLine($"Es wurden {shipsplaced} Schiffe palzert \n");
+
+
             }
             else
             {
@@ -105,7 +122,7 @@ namespace Schiffe_Versenken
             }
         }
 
-        static public void CreateMatchField(Board data)
+        static public void CreateMatchField(Board data, bool myfield = false)
         {
             Console.Write("   ");
             for (int z = 0; z < data.Matchfield.GetLength(0); z++)
@@ -127,7 +144,7 @@ namespace Schiffe_Versenken
                 for (int y = 0; y < data.Matchfield.GetLength(1); y++)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    if (data.Matchfield[x, y].Ship)
+                    if (data.Matchfield[x, y].Ship )
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
                     }

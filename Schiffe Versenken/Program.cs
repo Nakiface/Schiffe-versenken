@@ -9,8 +9,10 @@ namespace Schiffe_Versenken
         {
             //menu
             var menu = ConsoleOutput.Greeting();
-
-            //Game initalisieren
+            var rendererEnemy = new GameRendererEnemy();
+            var rendererKI = new GameRendererBase();
+            var rendererMine = new GameRendererMine();
+            
             switch (menu)
             {
                 case "Mensch":
@@ -19,9 +21,12 @@ namespace Schiffe_Versenken
                     //Spiel starten
                     while (playHu.board.shipfields > 0)
                     {
+                        
+                        playHu.Render(rendererEnemy);
                         playHu.Start();
-                        playHu.Render(new GameRendererMine());
+                        Console.Clear();
                     }
+                    //playHu.Render(rendererEnemy);
                     playHu.GameWon();
                     break;
 
@@ -32,7 +37,7 @@ namespace Schiffe_Versenken
                     while (playAi.board.shipfields > 0)
                     {
                         playAi.Start();
-                        playAi.Render(new GameRendererBase());
+                        playAi.Render(rendererKI);
                     }
                     playAi.GameWon();
                     break;
@@ -49,12 +54,15 @@ namespace Schiffe_Versenken
                     while (playAi2.board.shipfields > 0 && playHu2.board.shipfields > 0)
                     {
                         Console.Clear();
-                        playHu2.Render(new GameRendererEnemy());
-                        playAi2.Render(new GameRendererMine());
+                        playHu2.Render(rendererEnemy);
+                        playAi2.Render(rendererMine);
                         playHu2.Start();                      
                         playAi2.Start();                       
                     }
-                    playHu2.GameWon();
+                    if (playAi2.board.shipfields == 0)
+                        playAi2.GameWon();
+                    else
+                        playHu2.GameWon();
                     break;
             }
 

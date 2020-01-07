@@ -26,7 +26,7 @@ namespace Schiffe_Versenken
         public override void GameWon()
         {
             ConsoleOutput.CreateMatchField(board);
-            ConsoleOutput.GameEnd(board.countTry);
+            ConsoleOutput.GameWonAi(board.countTry);
         }
     }
 }

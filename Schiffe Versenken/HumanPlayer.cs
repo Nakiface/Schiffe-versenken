@@ -56,7 +56,7 @@ namespace Schiffe_Versenken
 
         public override void GameWon()
         {
-            ConsoleOutput.GameEnd(board.countTry);
+            ConsoleOutput.GameWonHu(board.countTry);
         }
     }
 }
