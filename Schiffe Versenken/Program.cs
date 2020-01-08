@@ -64,6 +64,29 @@ namespace Schiffe_Versenken
                     else
                         playHu2.GameWon();
                     break;
+
+                case "Mensch vs Mensch":
+                    var size2 = ConsoleOutput.SizeMatchField();
+
+                    var boardHu3 = Initialize.Start(size2);
+                    GameBase playHu3 = new HumanPlayer(boardHu3);
+
+                    var boardHu4 = Initialize.Start(size2);
+                    GameBase playHu4 = new HumanPlayer(boardHu4);
+
+                    while (playHu3.board.shipfields > 0 && playHu4.board.shipfields > 0)
+                    {
+                        Console.Clear();
+                        playHu3.Render(rendererEnemy);
+                        playHu4.Render(rendererMine);
+                        playHu3.Start();
+                        playHu4.Start();
+                    }
+                    if (playHu3.board.shipfields == 0)
+                        playHu3.GameWon();
+                    else
+                        playHu4.GameWon();
+                    break;
             }
 
 
