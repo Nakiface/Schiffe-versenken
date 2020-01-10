@@ -19,7 +19,7 @@ namespace Schiffe_Versenken
         public override void Render(Board board)
         {
             Console.WriteLine("Das ist mein Feld: ");
-            ConsoleOutput.CreateMatchField(board);
+            ConsoleOutput.CreateMatchField(board, true);
         }
     }
 
