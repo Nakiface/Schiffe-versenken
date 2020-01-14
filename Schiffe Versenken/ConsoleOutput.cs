@@ -23,6 +23,15 @@ namespace Schiffe_Versenken
             return menu[auswahl - 1];
         }
 
+        static public void NextPlayer ()
+        {
+            Console.Clear();
+            Console.WriteLine("der nächste Spieler ist an der Reihe");
+            Console.WriteLine("weiter mit enter");
+            Console.ReadLine();
+            Console.Clear();
+        }
+
         static public int SizeMatchField ()
         {
             int size = 0;
@@ -66,9 +75,12 @@ namespace Schiffe_Versenken
             Program.Main();
         }
 
-        static public void GameWonHu(int countTry)
+        static public void GameWonHu(int countTry, int winner = 0)
         {
-            Console.WriteLine($"Sie haben gewonnen und {countTry} Versuche gebraucht");
+            if (winner > 0)
+                Console.WriteLine($"Spieler {winner} hat gewonnen und {countTry} Versuche gebraucht");
+            else
+                Console.WriteLine($"Sie haben gewonnen und {countTry} Versuche gebraucht");
             Console.Write("Wenn Sie nochmal Spielen wollen Tippen Sie bitte \"y\": ");
             var Eingabe = Console.ReadLine();
             if (Eingabe == "y" || Eingabe == "Y")
@@ -95,6 +107,7 @@ namespace Schiffe_Versenken
             Console.WriteLine();
             Console.WriteLine("Digga das Spielfeld ist zu Groß Übertreib mal nicht!");
             Console.WriteLine("Jetzt starten wir nochmal und dann machst du mal Piano! \n");
+            Console.ReadLine();
             Program.Main();
         }
 
@@ -134,17 +147,17 @@ namespace Schiffe_Versenken
                     Console.Write($"{z + 1}  ");
             }
             Console.WriteLine();
-            for (int x = 0; x < data.Matchfield.GetLength(0); x++)
+            for (int y = 0; y < data.Matchfield.GetLength(0); y++)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                if (x < 9)
-                    Console.Write($"{x + 1}  ");
+                if (y < 9)
+                    Console.Write($"{y + 1}  ");
                 else
-                    Console.Write($"{x + 1} ");
-                for (int y = 0; y < data.Matchfield.GetLength(1); y++)
+                    Console.Write($"{y + 1} ");
+                for (int x = 0; x < data.Matchfield.GetLength(1); x++)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    if (data.Matchfield[x, y].Ship && myfield == true)
+                    if (data.Matchfield[x, y].Ship)// && myfield)// == true)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
                     }

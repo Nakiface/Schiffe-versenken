@@ -30,7 +30,7 @@ namespace Schiffe_Versenken
 
                 //Wenn die Eingabe eine Zahl war und diese im Bereich der Spielfeldgröße liegt
                 //Wird der Schleife bescheid gegeben das die Eingabe korrekt war
-                if ((int.TryParse(actions[1], out x)) && (int.TryParse(actions[0], out y)))
+                if ((int.TryParse(actions[0], out x)) && (int.TryParse(actions[1], out y)))
                 {
                     if (x <= size && y <= size)
                     {
@@ -54,7 +54,7 @@ namespace Schiffe_Versenken
             ConsoleOutput.ShipIsSunk();
         }
 
-        public override void GameWon()
+        public override void GameWon(int winner = 0)
         {
             ConsoleOutput.GameWonHu(board.countTry);
         }

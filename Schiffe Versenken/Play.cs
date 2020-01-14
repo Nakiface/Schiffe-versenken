@@ -43,7 +43,7 @@ namespace Schiffe_Versenken
 
         public abstract void Start();
 
-        public abstract void GameWon();
+        public abstract void GameWon(int winner  = 0);
 
         public void Render(IGameRenderer renderer)
         {
@@ -130,7 +130,7 @@ namespace Schiffe_Versenken
 
         private bool isShipSunkYPlus(int x, int y, int size)
         {
-            for (int yCheck = x; yCheck < size; yCheck++)
+            for (int yCheck = y; yCheck < size; yCheck++)
             {
                 if (board.Matchfield[x, yCheck].Ship && !board.Matchfield[x, yCheck].Hit)
                     return false;
@@ -142,7 +142,7 @@ namespace Schiffe_Versenken
 
         private bool isShipSunkYMinus(int x, int y, int size)
         {
-            for (int yCheck = x; yCheck >= 0; yCheck--)
+            for (int yCheck = y; yCheck >= 0; yCheck--)
             {
                 if (board.Matchfield[x, yCheck].Ship && !board.Matchfield[x, yCheck].Hit)
                     return false;

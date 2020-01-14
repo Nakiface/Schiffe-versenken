@@ -64,21 +64,10 @@ namespace Schiffe_Versenken
                     var boardHu4 = Initialize.Start(size2);
                     GameBase playHu4 = new HumanPlayer(boardHu4);
 
-                    while (playHu3.board.shipfields > 0 && playHu4.board.shipfields > 0)
-                    {
-                        Console.Clear();
-                        playHu3.Render(rendererEnemy);
-                        playHu4.Render(rendererMine);
-                        playHu3.Start();
-                        playHu4.Start();
-                    }
-                    if (playHu3.board.shipfields == 0)
-                        playHu3.GameWon();
-                    else
-                        playHu4.GameWon();
-                    break;
+                    var playHuVsHu = new VersusPlay(playHu3, playHu4);
+                    playHuVsHu.start();
+                    break;                 
             }
-
             Console.ReadLine();
         }
     }
@@ -104,15 +93,33 @@ namespace Schiffe_Versenken
                 while (player2.board.shipfields > 0 && player1.board.shipfields > 0)
                 {
                     Console.Clear();
-                    player2.Render(rendererEnemy);
-                    player1.Render(rendererMine);
-                    player1.Start();
-                    player2.Start();
+                    if (player1 is AIPlayer)
+                    {
+                        player2.Render(rendererEnemy);
+                        player1.Render(rendererMine);
+                        player1.Start();
+                        player2.Start();
+                    }
+                    else
+                    {                    
+                        player2.Render(rendererMine);
+                        player1.Render(rendererEnemy);
+                        player1.Start();
+                        if (player1.board.shipfields == 0)
+                            break;
+                        ConsoleOutput.NextPlayer();
+                        player1.Render(rendererMine);
+                        player2.Render(rendererEnemy);
+                        player2.Start();
+                        if (player2.board.shipfields == 0)
+                            break;
+                        ConsoleOutput.NextPlayer();
+                    }
                 }
                 if (player2.board.shipfields == 0)
-                    player2.GameWon();
+                    player2.GameWon(2);
                 else
-                    player1.GameWon();
+                    player1.GameWon(1);
             }
         }
     }
