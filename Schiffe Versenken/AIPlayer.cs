@@ -15,7 +15,8 @@ namespace Schiffe_Versenken
 
         public override List<int> GetCoordinates (int size)
         {
-            return simpleAI.Shoot(board);
+            AwesomeAI awesomeAI = new AwesomeAI(board);
+            return awesomeAI.Shoot();
         }
 
         public override void ShipIsSunk()

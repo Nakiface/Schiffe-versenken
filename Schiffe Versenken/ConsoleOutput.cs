@@ -52,10 +52,10 @@ namespace Schiffe_Versenken
         }
 
         static public void ShipIsSunk ()
-        {
+        {   
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\nDas Schiff ist untergegangen!!!");
+            Console.WriteLine("Das Schiff ist untergegangen!!!");
             Console.WriteLine("Weiter mit belibiger Taste");
             Console.ReadKey();
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -165,6 +165,8 @@ namespace Schiffe_Versenken
                     {
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                     }
+                    if (data.Matchfield[x, y].sunk)
+                        Console.ForegroundColor = ConsoleColor.Green;
                     if (data.Matchfield[x, y].Miss)
                     {
                         Console.ForegroundColor = ConsoleColor.Black;                        

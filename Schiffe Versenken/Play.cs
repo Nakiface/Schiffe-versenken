@@ -156,8 +156,43 @@ namespace Schiffe_Versenken
         private bool isShipSunk(int x, int y, int size)
         {
             if (isShipSunkXPlus(x, y, size) && isShipSunkXMinus(x, y, size) && isShipSunkYPlus(x, y, size) && isShipSunkYMinus(x, y, size))
+            {
+                setSunkTrue(x, y, size);
                 return true;
+            }       
             return false;
+        }
+
+        private void setSunkTrue(int x, int y, int size)
+        {
+            for (int xPlus = x; xPlus < size; xPlus++)
+            {
+                if (board.Matchfield[xPlus, y].Ship)
+                    board.Matchfield[xPlus, y].sunk = true;
+                else
+                    break;
+            }
+            for (int xMinus = x; xMinus >= 0; xMinus--)
+            {
+                if (board.Matchfield[xMinus, y].Ship)
+                    board.Matchfield[xMinus, y].sunk = true;
+                else
+                    break;
+            }
+            for (int yPlus = y; yPlus < size; yPlus++)
+            {
+                if (board.Matchfield[x, yPlus].Ship)
+                    board.Matchfield[x, yPlus].sunk = true;
+                else
+                    break;
+            }
+            for (int yMinus = y; yMinus >= 0; yMinus--)
+            {
+                if (board.Matchfield[x, yMinus].Ship)
+                    board.Matchfield[x, yMinus].sunk = true;
+                else
+                    break;
+            }         
         }
     }
 }
