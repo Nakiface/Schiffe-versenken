@@ -157,7 +157,7 @@ namespace Schiffe_Versenken
                 for (int x = 0; x < data.Matchfield.GetLength(1); x++)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    if (data.Matchfield[x, y].Ship)// && myfield)// == true)
+                    if (data.Matchfield[x, y].Ship && myfield)// == true)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
                     }

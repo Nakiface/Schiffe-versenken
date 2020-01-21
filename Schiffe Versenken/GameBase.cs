@@ -2,6 +2,7 @@
 
 namespace Schiffe_Versenken
 {
+
     public abstract class GameBase
     {
         public Board board { get; set; }
