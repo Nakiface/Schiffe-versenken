@@ -1,37 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Schiffe_Versenken
 {
-    public interface IGameRenderer
-    {
-        void Render(Board board);
-    }
-
-    public class GameRendererBase:IGameRenderer
-    {
-        public virtual void Render(Board board)
-        { }
-    }
-
-    public class GameRendererMine:GameRendererBase
-    {
-        public override void Render(Board board)
-        {
-            Console.WriteLine("Das ist mein Feld: ");
-            ConsoleOutput.CreateMatchField(board, true);
-        }
-    }
-
-    public class GameRendererEnemy:GameRendererBase
-    {
-        public override void Render(Board board)
-        {
-            Console.WriteLine("Das ist das Gegner Feld: ");
-            ConsoleOutput.CreateMatchField(board);
-        }
-    }
-
     public abstract class GameBase
     {
         public Board board { get; set; }
@@ -67,10 +37,20 @@ namespace Schiffe_Versenken
             if (board.Matchfield[x, y].Ship && !board.Matchfield[x,y].Hit)
             {
                 board.Matchfield[x, y].Hit = true;
+                if (board.toSink == false)
+                {
+                    InitHit.x = x;
+                    InitHit.y = y;
+                }
+                board.isHit = true;
+                board.toSink = true;
+  
                 board.shipfields -= 1;
                 if (isShipSunk(x, y, size))
                 {
                     ShipIsSunk();
+                    board.toSink = false;
+                    
                 }
             }
 
@@ -78,6 +58,7 @@ namespace Schiffe_Versenken
             //setze die Feldinfo "es war ein fehldschuss" auf wahr
             if (!board.Matchfield[x,y].Ship)
             {
+                board.isHit = false;
                 board.Matchfield[x, y].Miss = true;
             }
 

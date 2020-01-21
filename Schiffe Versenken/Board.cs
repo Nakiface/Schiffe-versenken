@@ -8,6 +8,8 @@ namespace Schiffe_Versenken
         public int size { get; set; }
         public int shipfields { get; set; }
         public int countTry { get; set; }
+        public bool isHit { get; set; } = false;
+        public bool toSink { get; set; }
 
         public Board(int size)
         {   

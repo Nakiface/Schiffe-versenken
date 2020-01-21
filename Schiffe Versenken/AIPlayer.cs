@@ -2,11 +2,13 @@
 
 namespace Schiffe_Versenken
 {
+    
     public class AIPlayer : GameBase
     {
+        public AwesomeAI awesomeAI { get; set; }
         public AIPlayer (Board board) : base(board)
         {
-
+            awesomeAI = new AwesomeAI(board);
         }
         public override void Start()
         {
@@ -15,7 +17,6 @@ namespace Schiffe_Versenken
 
         public override List<int> GetCoordinates (int size)
         {
-            AwesomeAI awesomeAI = new AwesomeAI(board);
             return awesomeAI.Shoot();
         }
 
